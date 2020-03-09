@@ -76,10 +76,18 @@ var app = app || {};
     },
 
     render: function () {
+      var prefix = this.props.todo.title.split(':')
+      var check = function (prefix) {
+        if (prefix.length > 1 && prefix[0] === 'work') {
+          return true
+        } else {
+          return false
+        }
+      }
       return (
-
         <li className={classNames({
-          completed: this.props.todo.completed,
+          workItem: check(prefix),
+          ompleted: this.props.todo.completed,
           editing: this.props.editing
         })}
         >
