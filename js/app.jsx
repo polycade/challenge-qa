@@ -11,6 +11,7 @@ var app = app || {};
   app.ALL_TODOS = 'all'
   app.ACTIVE_TODOS = 'active'
   app.COMPLETED_TODOS = 'completed'
+  app.HOME_TODOS = 'home'
   var TodoFooter = app.TodoFooter
   var TodoItem = app.TodoItem
 
@@ -30,7 +31,8 @@ var app = app || {};
       var router = Router({
         '/': setState.bind(this, { nowShowing: app.ALL_TODOS }),
         '/active': setState.bind(this, { nowShowing: app.ACTIVE_TODOS }),
-        '/completed': setState.bind(this, { nowShowing: app.COMPLETED_TODOS })
+        '/completed': setState.bind(this, { nowShowing: app.COMPLETED_TODOS }),
+        '/home': setState.bind(this, { nowShowing: app.HOME_TODOS })
       })
       router.init('/')
     },
@@ -91,8 +93,10 @@ var app = app || {};
 
       var shownTodos = todos.filter(function (todo) {
         switch (this.state.nowShowing) {
+          case app.HOME_TODOS:
+            return todo.title.split(':')[0] === 'home'
           case app.ACTIVE_TODOS:
-            return !todo.completed
+            return todo.completed
           case app.COMPLETED_TODOS:
             return todo.completed
           default:
