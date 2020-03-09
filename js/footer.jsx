@@ -57,6 +57,15 @@ var app = app || {};
 									Completed
               </a>
             </li>
+            {' '}
+            <li>
+              <a
+                href='#/home'
+                className={classNames({ selected: nowShowing === app.HOME_TODOS })}
+              >
+									Home
+              </a>
+            </li>
           </ul>
           {clearButton}
         </footer>
